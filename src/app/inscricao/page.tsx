@@ -1,3 +1,5 @@
+"use client"
+
 export default function Inscricao() {
-  return <div>Formulário de inscrição</div>
+  return <div></div>
 }

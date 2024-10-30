@@ -1,10 +1,12 @@
 "use client"
 
+import "./index.css"
 import Link from "next/link"
 import Image from "next/image"
 import NavItem, { NavIntemInterface } from "../NavItem"
-import "./index.css"
 import { usePathname } from "next/navigation"
+import { FaBars, FaXmark } from "react-icons/fa6"
+import { useState } from "react"
 
 export default function Navbar() {
   const items: NavIntemInterface[] = [
@@ -27,20 +29,21 @@ export default function Navbar() {
   ]
 
   const pathname = usePathname()
+  const [openMenu, setOpenMenu] = useState<boolean>(false)
 
   return (
     <header>
       <nav className="navbar">
-        <Link href="/" className="logo">
+        <Link href="/" className={`logo ${openMenu ? "open" : ""}`}>
           <Image
-            src="/semear-logo.svg"
+            src="/semear-logo-texto.svg"
             width={120}
             height={100}
             alt="Logo do semear"
           />
         </Link>
 
-        <ul className="nav-items">
+        <ul className={`nav-items ${openMenu ? "open" : ""}`}>
           {items.map((item, index) => (
             <NavItem
               key={index}
@@ -51,7 +54,11 @@ export default function Navbar() {
           ))}
         </ul>
 
-        <button className="btn-default">Contatar</button>
+        <button className="btn-mobile" onClick={() => setOpenMenu(!openMenu)}>
+          {openMenu ? <FaXmark /> : <FaBars />}
+        </button>
+
+        <button className="btn-default">Login</button>
       </nav>
     </header>
   )
