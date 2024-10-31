@@ -1,8 +1,8 @@
+import { ChakraProvider } from "@chakra-ui/react"
 import type { Metadata } from "next"
 import { Poppins } from "next/font/google"
 import Navbar from "@/components/NavBar"
 import Footer from "@/components/Footer"
-import Home from "@/app/page"
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -11,7 +11,7 @@ const poppins = Poppins({
 
 export const metadata: Metadata = {
   title: "Semear | Home",
-  description: "Página home do semear",
+  description: "Página home do Semear",
 }
 
 export default function RootLayout({
@@ -22,9 +22,11 @@ export default function RootLayout({
   return (
     <html lang="pt-br" suppressHydrationWarning>
       <body className={poppins.className}>
-        <Navbar />
-        <main>{children}</main>
-        <Footer />
+        <ChakraProvider>
+          <Navbar />
+          <main>{children}</main>
+          <Footer />
+        </ChakraProvider>
       </body>
     </html>
   )
