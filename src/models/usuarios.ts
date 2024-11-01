@@ -52,6 +52,13 @@ const updateUsuario = async (id: number, data: Partial<Usuarios>) => {
 
   console.log(responsavel);
 
+  if (data?.Responsavel?){
+    await prisma.responsavel.update({
+      where: {id: id}
+    })
+
+  }
+
   return await prisma.usuario.update({
     where: { id: id },
     data: {
@@ -60,15 +67,6 @@ const updateUsuario = async (id: number, data: Partial<Usuarios>) => {
       data_nascimento: data?.data_nascimento,
       telefone: data?.telefone,
       igreja: data?.igreja,
-      Responsavel: {
-        update: data?.Responsavel?.map((responsavel) => ({
-          where: { id: responsavel.id },
-          data: {
-            nome_responsavel: responsavel.nome_responsavel,
-            telefone_responsavel: responsavel.telefone_responsavel,
-          },
-        })),
-      },
     },
   });
 };
