@@ -1,4 +1,3 @@
-import { NextResponse } from 'next/server';
 import { usuarioModel } from '@/models/usuarios';
 
 export async function GET(

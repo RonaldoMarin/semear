@@ -14,6 +14,7 @@ export async function PATCH(
 
     return new NextResponse(JSON.stringify(usuario), { status: 200 });
   } catch (error: any) {
+    console.error(error);
     return new NextResponse(JSON.stringify({ message: error.message }), {
       status: 500,
     });

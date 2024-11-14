@@ -11,7 +11,7 @@ const getAllUsuarios = async (searchParams?: { [key: string]: any }) => {
       }),
     },
     include: {
-      Responsavel: true,
+      Responsaveis: true,
     },
   });
 };
@@ -22,7 +22,7 @@ const getUsuarioById = async (id: number) => {
       id: id,
     },
     include: {
-      Responsavel: true,
+      Responsaveis: true,
     },
   });
 };
@@ -35,7 +35,7 @@ const createUsuario = async (data: Usuarios) => {
       data_nascimento: data.data_nascimento,
       telefone: data.telefone,
       igreja: data.igreja,
-      Responsavel: {
+      Responsaveis: {
         create: data.Responsavel.map((responsavel) => ({
           nome_responsavel: responsavel.nome_responsavel,
           telefone_responsavel: responsavel.telefone_responsavel,
@@ -46,27 +46,16 @@ const createUsuario = async (data: Usuarios) => {
 };
 
 const updateUsuario = async (id: number, data: Partial<Usuarios>) => {
-  const responsavel = await prisma.responsavel.findMany({
-    where: { dependente_id: id },
-  });
-
-  console.log(responsavel);
-
-  if (data?.Responsavel?){
-    await prisma.responsavel.update({
-      where: {id: id}
-    })
-
-  }
-
   return await prisma.usuario.update({
-    where: { id: id },
+    where: { id },
     data: {
-      nome: data?.nome,
-      cpf: data?.cpf,
-      data_nascimento: data?.data_nascimento,
-      telefone: data?.telefone,
-      igreja: data?.igreja,
+      nome: data.nome,
+      cpf: data.cpf,
+      data_nascimento: data.data_nascimento
+        ? new Date(data.data_nascimento)
+        : undefined,
+      telefone: data.telefone,
+      igreja: data.igreja,
     },
   });
 };

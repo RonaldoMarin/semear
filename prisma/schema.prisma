@@ -19,7 +19,7 @@ model Usuario {
   igreja           String
   data_cadastro    DateTime      @default(now())
   data_atualizacao DateTime      @updatedAt
-  Responsavel      Responsavel[] 
+  Responsaveis     Responsavel[] @relation("UsuarioResponsaveis") // Relação nomeada para clareza
 
   @@map("usuarios")
 }
@@ -28,8 +28,8 @@ model Responsavel {
   id                   Int     @id @default(autoincrement())
   nome_responsavel     String
   telefone_responsavel String
-  dependente_id        Int
-  usuario              Usuario @relation(fields: [dependente_id], references: [id], onUpdate: NoAction, onDelete: Cascade)
+  usuario_id           Int
+  usuario              Usuario @relation("UsuarioResponsaveis", fields: [usuario_id], references: [id], onUpdate: Cascade, onDelete: Cascade)
 
   @@map("responsavel")
 }
