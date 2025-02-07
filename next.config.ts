@@ -14,6 +14,7 @@
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  reactStrictMode: true,
   images: {
     remotePatterns: [
       {
@@ -27,7 +28,6 @@ const nextConfig = {
     // your project has ESLint errors.
     ignoreDuringBuilds: true,
   },
-  swcMinify: false,
   typescript: {
     // !! WARN !!
     // Dangerously allow production builds to successfully complete even if

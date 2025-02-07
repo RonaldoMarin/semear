@@ -34,6 +34,7 @@ const createUsuario = async (data: Usuarios) => {
       cpf: data.cpf,
       data_nascimento: data.data_nascimento,
       telefone: data.telefone,
+      email: data.email,
       igreja: data.igreja,
       Responsaveis: {
         create: data.Responsavel.map((responsavel) => ({

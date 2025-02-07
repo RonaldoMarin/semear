@@ -16,10 +16,12 @@ model Usuario {
   cpf              String        @unique
   data_nascimento  DateTime
   telefone         String
+  email            String
   igreja           String
   data_cadastro    DateTime      @default(now())
   data_atualizacao DateTime      @updatedAt
   Responsaveis     Responsavel[] @relation("UsuarioResponsaveis") // Relação nomeada para clareza
+  inscricoes       Inscricao[] // Um usuário pode ter várias inscrições
 
   @@map("usuarios")
 }
@@ -32,4 +34,52 @@ model Responsavel {
   usuario              Usuario @relation("UsuarioResponsaveis", fields: [usuario_id], references: [id], onUpdate: Cascade, onDelete: Cascade)
 
   @@map("responsavel")
+}
+
+model Evento {
+  id               Int      @id @default(autoincrement())
+  nome_evento      String
+  data_evento      DateTime
+  local_evento     String
+  data_cadastro    DateTime @default(now())
+  data_atualizacao DateTime @updatedAt
+
+  // Relacionamento com as inscrições
+  inscricoes Inscricao[] // Um evento pode ter várias inscrições
+
+  @@map("evento")
+}
+
+model Inscricao {
+  id             Int      @id @default(autoincrement())
+  usuario_id     Int
+  evento_id      Int
+  data_inscricao DateTime @default(now())
+
+  // Informações do usuário (relacionamento)
+  usuario Usuario @relation(fields: [usuario_id], references: [id])
+
+  // Informações do evento (relacionamento)
+  evento Evento @relation(fields: [evento_id], references: [id])
+
+  // Informações adicionais
+  quantidade_camisas Int? // Campo opcional para a quantidade de camisas extras
+  observacoes        String? // Campo opcional para observações adicionais
+
+  // Perguntas adicionais sobre a experiência missionária
+  experiencia_missionaria   String? // Resposta sobre a participação em trabalhos missionários
+  experiencia_evangelistica String? // Descrição da experiência com trabalhos evangelísticos (se já participou)
+
+  // Informações do pastor
+  nome_pastor     String? // Nome do pastor
+  telefone_pastor String? // Telefone do pastor
+
+  // Novas perguntas
+  area_atuacao_igreja String? // Área de atuação na igreja (ex: Departamento Infantil, Louvor, etc.)
+  tamanho_camisa      String? // Tamanho da camisa (PP, P, M, G, GG, XL)
+
+  data_cadastro    DateTime @default(now())
+  data_atualizacao DateTime @updatedAt
+
+  @@map("inscricao")
 }
