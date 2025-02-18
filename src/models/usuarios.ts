@@ -32,16 +32,20 @@ const createUsuario = async (data: Usuarios) => {
     data: {
       nome: data.nome,
       cpf: data.cpf,
-      data_nascimento: data.data_nascimento,
+      data_nascimento: new Date(data.data_nascimento), // Converte a data
       telefone: data.telefone,
       email: data.email,
       igreja: data.igreja,
       Responsaveis: {
-        create: data.Responsavel.map((responsavel) => ({
-          nome_responsavel: responsavel.nome_responsavel,
-          telefone_responsavel: responsavel.telefone_responsavel,
-        })),
+        create:
+          data.Responsaveis?.map((responsavel) => ({
+            nome_responsavel: responsavel.nome_responsavel,
+            telefone_responsavel: responsavel.telefone_responsavel,
+          })) || [], // Garante que não seja undefined
       },
+    },
+    include: {
+      Responsaveis: true, // Retorna os responsáveis junto com o usuário criado
     },
   });
 };
