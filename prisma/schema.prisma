@@ -44,42 +44,28 @@ model Evento {
   data_cadastro    DateTime @default(now())
   data_atualizacao DateTime @updatedAt
 
-  // Relacionamento com as inscrições
-  inscricoes Inscricao[] // Um evento pode ter várias inscrições
+  inscricoes Inscricao[]
 
   @@map("evento")
 }
 
 model Inscricao {
-  id             Int      @id @default(autoincrement())
-  usuario_id     Int
-  evento_id      Int
-  data_inscricao DateTime @default(now())
-
-  // Informações do usuário (relacionamento)
-  usuario Usuario @relation(fields: [usuario_id], references: [id])
-
-  // Informações do evento (relacionamento)
-  evento Evento @relation(fields: [evento_id], references: [id])
-
-  // Informações adicionais
-  quantidade_camisas Int? // Campo opcional para a quantidade de camisas extras
-  observacoes        String? // Campo opcional para observações adicionais
-
-  // Perguntas adicionais sobre a experiência missionária
-  experiencia_missionaria   String? // Resposta sobre a participação em trabalhos missionários
-  experiencia_evangelistica String? // Descrição da experiência com trabalhos evangelísticos (se já participou)
-
-  // Informações do pastor
-  nome_pastor     String? // Nome do pastor
-  telefone_pastor String? // Telefone do pastor
-
-  // Novas perguntas
-  area_atuacao_igreja String? // Área de atuação na igreja (ex: Departamento Infantil, Louvor, etc.)
-  tamanho_camisa      String? // Tamanho da camisa (PP, P, M, G, GG, XL)
-
-  data_cadastro    DateTime @default(now())
-  data_atualizacao DateTime @updatedAt
+  id                        Int      @id @default(autoincrement())
+  usuario_id                Int
+  evento_id                 Int
+  data_inscricao            DateTime @default(now())
+  usuario                   Usuario  @relation(fields: [usuario_id], references: [id])
+  evento                    Evento   @relation(fields: [evento_id], references: [id])
+  quantidade_camisas        Int?
+  observacoes               String?
+  experiencia_missionaria   String?
+  experiencia_evangelistica String?
+  nome_pastor               String?
+  telefone_pastor           String?
+  area_atuacao_igreja       String?
+  tamanho_camisa            String?
+  data_cadastro             DateTime @default(now())
+  data_atualizacao          DateTime @updatedAt
 
   @@map("inscricao")
 }

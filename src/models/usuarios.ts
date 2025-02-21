@@ -66,6 +66,12 @@ const updateUsuario = async (id: number, data: Partial<Usuarios>) => {
 };
 
 const deleteUsuario = async (id: number) => {
+  console.log('Esse é o ID: ', id);
+
+  await prisma.inscricao.deleteMany({
+    where: { usuario_id: id },
+  });
+
   return await prisma.usuario.delete({
     where: {
       id: id,

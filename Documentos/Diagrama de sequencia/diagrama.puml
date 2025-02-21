@@ -1,0 +1,31 @@
+@startuml
+actor "Usuário" as User
+participant "Sistema" as System
+participant "Evento" as Event
+participant "Inscrição" as Registration
+participant "Responsável" as Responsible
+participant "Usuário" as UserEntity
+
+User -> System: Solicita lista de eventos
+System -> Event: getAllEventos()
+Event --> System: Retorna eventos
+System --> User: Exibe eventos
+
+User -> System: Solicita inscrição no evento
+System -> Event: getEventoById()
+Event --> System: Evento válido
+System -> Registration: createInscricao()
+Registration --> System: Confirmação de inscrição
+System --> User: Mensagem de sucesso
+
+User -> System: Solicita criação de responsável
+System -> Responsible: createResponsavel()
+Responsible --> System: Responsável criado
+System --> User: Confirmação de criação
+
+User -> System: Solicita dados do usuário
+System -> UserEntity: getUsuarioById()
+UserEntity --> System: Retorna dados do usuário
+System --> User: Exibe dados do usuário
+
+@enduml
