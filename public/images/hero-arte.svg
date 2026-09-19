@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 950" preserveAspectRatio="xMidYMid slice" role="presentation" focusable="false">
+  <defs>
+    <linearGradient id="semear-fundo" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#0e251b"/>
+      <stop offset="0.55" stop-color="#1e4634"/>
+      <stop offset="1" stop-color="#3f7355"/>
+    </linearGradient>
+    <radialGradient id="semear-clarao" cx="0.72" cy="0.24" r="0.62">
+      <stop offset="0" stop-color="#e5b356" stop-opacity="0.3"/>
+      <stop offset="1" stop-color="#e5b356" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="semear-sol" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#f7d98f" stop-opacity="0.85"/>
+      <stop offset="1" stop-color="#f7d98f" stop-opacity="0"/>
+    </radialGradient>
+    <g id="semear-folha">
+      <path d="M0 0 C 12 -5 22 -17 22 -31 C 22 -45 12 -57 0 -66 C -12 -57 -22 -45 -22 -31 C -22 -17 -12 -5 0 0 Z"/>
+    </g>
+  </defs>
+
+  <rect width="1600" height="950" fill="url(#semear-fundo)"/>
+  <rect width="1600" height="950" fill="url(#semear-clarao)"/>
+
+  <circle cx="1180" cy="245" r="175" fill="url(#semear-sol)"/>
+  <circle cx="1180" cy="245" r="122" fill="none" stroke="#f2cc7e" stroke-width="2" opacity="0.25"/>
+  <circle cx="1180" cy="245" r="94" fill="none" stroke="#f2cc7e" stroke-width="1.5" opacity="0.18"/>
+
+  <path d="M-40 822 C 220 702 520 692 780 762 C 1040 832 1320 832 1640 782 L1640 950 L-40 950 Z" fill="#173429" opacity="0.9"/>
+  <path d="M-40 884 C 300 774 760 772 1180 854 C 1380 892 1540 884 1640 854 L1640 950 L-40 950 Z" fill="#102a1f" opacity="0.95"/>
+  <path d="M-40 814 C 220 694 520 684 780 754 C 1040 824 1320 824 1640 774" fill="none" stroke="#fbf8f1" stroke-width="1.5" opacity="0.16"/>
+
+  <use href="#semear-folha" x="200" y="180" transform="rotate(40 200 180)" fill="#f3eddf" opacity="0.14"/>
+  <use href="#semear-folha" x="330" y="300" transform="rotate(-35 330 300)" fill="#f3eddf" opacity="0.1"/>
+  <use href="#semear-folha" x="520" y="240" transform="rotate(95 520 240) scale(0.75)" fill="#f2cc7e" opacity="0.16"/>
+  <use href="#semear-folha" x="760" y="150" transform="rotate(-60 760 150) scale(0.55)" fill="#f3eddf" opacity="0.12"/>
+  <use href="#semear-folha" x="900" y="330" transform="rotate(130 900 330) scale(0.8)" fill="#98ab78" opacity="0.14"/>
+  <use href="#semear-folha" x="1050" y="180" transform="rotate(-80 1050 180) scale(0.6)" fill="#f3eddf" opacity="0.12"/>
+  <use href="#semear-folha" x="1250" y="500" transform="rotate(200 1250 500) scale(0.9)" fill="#f3eddf" opacity="0.1"/>
+  <use href="#semear-folha" x="1380" y="320" transform="rotate(-140 1380 320) scale(0.65)" fill="#f2cc7e" opacity="0.14"/>
+  <use href="#semear-folha" x="150" y="520" transform="rotate(20 150 520) scale(0.9)" fill="#f3eddf" opacity="0.1"/>
+  <use href="#semear-folha" x="620" y="560" transform="rotate(-110 620 560) scale(0.7)" fill="#f2cc7e" opacity="0.13"/>
+  <use href="#semear-folha" x="980" y="600" transform="rotate(160 980 600) scale(0.85)" fill="#f3eddf" opacity="0.1"/>
+  <use href="#semear-folha" x="1450" y="620" transform="rotate(-35 1450 620) scale(0.6)" fill="#f3eddf" opacity="0.12"/>
+  <use href="#semear-folha" x="430" y="450" transform="rotate(75 430 450) scale(0.5)" fill="#f3eddf" opacity="0.1"/>
+  <use href="#semear-folha" x="1150" y="430" transform="rotate(-165 1150 430) scale(0.55)" fill="#f2cc7e" opacity="0.12"/>
+
+  <g fill="#fbf8f1">
+    <circle cx="1120" cy="120" r="2.4" opacity="0.16"/>
+    <circle cx="1310" cy="90" r="1.8" opacity="0.13"/>
+    <circle cx="870" cy="60" r="2.2" opacity="0.12"/>
+    <circle cx="470" cy="95" r="1.6" opacity="0.12"/>
+    <circle cx="640" cy="40" r="1.4" opacity="0.1"/>
+    <circle cx="1460" cy="150" r="2" opacity="0.12"/>
+    <circle cx="240" cy="60" r="1.6" opacity="0.1"/>
+  </g>
+</svg>

@@ -1,0 +1,19 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Contato {
+  id       Int      @id @default(autoincrement())
+  nome     String
+  email    String
+  mensagem String
+  criadoEm DateTime @default(now()) @map("criado_em")
+  lidoEm   Boolean  @default(false) @map("lido_em")
+
+  @@map("contatos")
+}
