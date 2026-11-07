@@ -1,59 +1,125 @@
 import type { SiteConfig } from "@/types/content";
 
+/**
+ * Conteúdo editável do site institucional.
+ * Os links da navegação começam com "/" para funcionarem a partir de qualquer
+ * página (ex.: futuras /inscricoes e /loja voltando para as seções da home).
+ */
 export const siteConfig = {
-  name: "Projeto Semear",
+  name: "Semear no Sertão",
   shortName: "Semear",
-  eyebrow: "MISSÃO SEMEAR NO SERTÃO",
+  tagline: "Missão Semear no Sertão",
+  whatsappDisplay: "(81) 99333-6981",
+  navigation: [
+    { label: "A missão", href: "/#missao" },
+    { label: "Como atuamos", href: "/#frentes" },
+    { label: "Participe", href: "/#participe" },
+    { label: "Seja mantenedor", href: "/mantenedor" },
+    { label: "Inscrições", href: "/inscricoes" },
+    { label: "Loja", href: "/loja" },
+    { label: "Contato", href: "/#contato" },
+  ],
   hero: {
-    title: "Espalhando a semente da salvação",
+    eyebrow: "Missão no sertão nordestino",
+    title: "Espalhando a semente",
+    highlight: "da salvação",
     description:
-      "Caminhamos com igrejas, voluntários e comunidades para que a presença de Cristo floresça onde a vida acontece.",
-    image: "/images/hero-arte.svg",
-    alt: "Ilustração conceitual do Projeto Semear: sol, morros do sertão e sementes",
-  },
-  mission: {
-    label: "Nossa semente",
-    title: "A missão nasce do encontro e cresce em comunidade.",
-    description:
-      "O Projeto Semear é uma iniciativa missionária em construção, voltada a servir o Nordeste com escuta, presença e parcerias duradouras. Queremos somar àquilo que Deus já está fazendo em cada lugar.",
-    statement:
-      "Comunidades fortalecidas para viver, servir e multiplicar esperança no sertão nordestino.",
+      "Caminhamos com igrejas, voluntários e comunidades do sertão para que a presença de Cristo floresça onde a vida acontece.",
+    image: "/images/semear-encontro.jpeg",
+    alt: "Jovens da missão reunidos ao ar livre, sentados sobre pedras ao entardecer",
   },
   statistics: [
     { value: "30", label: "comunidades alcançadas" },
-    { value: "6", label: "anos de projeto" },
+    { value: "6", label: "anos de missão" },
     { value: "+200", label: "voluntários mobilizados" },
-    { value: "1", label: "povoado a longo prazo" },
+    { value: "1", label: "povoado acompanhado a longo prazo" },
   ],
-  projects: [
+  mission: {
+    label: "Nossa missão",
+    title: "A semente nasce do encontro e cresce em comunidade.",
+    description:
+      "O Semear no Sertão é uma iniciativa missionária da igreja para servir o Nordeste com escuta, presença e parcerias duradouras. Não chegamos com respostas prontas: queremos somar àquilo que Deus já está fazendo em cada lugar.",
+    statement:
+      "Comunidades fortalecidas para viver, servir e multiplicar esperança no sertão nordestino.",
+  },
+  verse: {
+    text: "Vocês não me escolheram, mas eu os escolhi para irem e darem fruto, fruto que permaneça.",
+    reference: "João 15:16",
+  },
+  fronts: [
     {
-      number: "01",
       title: "Presença no campo",
-      description: "Visitas, escuta e apoio a igrejas e famílias que fazem do sertão o seu lar.",
+      description:
+        "Visitas, escuta e apoio a igrejas e famílias que fazem do sertão o seu lar — antes, durante e depois de cada viagem.",
       tag: "Missões",
+      icon: "presence",
     },
     {
-      number: "02",
       title: "Formação que multiplica",
-      description: "Espaços de aprendizado e cuidado para líderes, voluntários e novas gerações.",
-      tag: "Capacitação",
+      description:
+        "Espaços de aprendizado e cuidado para líderes locais, voluntários e novas gerações.",
+      tag: "Discipulado",
+      icon: "growth",
     },
     {
-      number: "03",
       title: "Parcerias que florescem",
-      description: "Conexões entre pessoas e igrejas para servir com continuidade, respeito e propósito comum.",
+      description:
+        "Conexões entre pessoas e igrejas para servir com continuidade, respeito e propósito comum.",
       tag: "Mobilização",
+      icon: "hands",
     },
   ],
+  story: {
+    eyebrow: "Presença antes de pressa",
+    title: "Servir também é sentar, ouvir e aprender.",
+    description:
+      "Queremos que mais pessoas conheçam Jesus. Por isso vamos às comunidades para compartilhar o evangelho, ouvir suas histórias e caminhar junto — também depois que a viagem termina.",
+  },
   participation: [
-    { number: "01", title: "Ore", description: "Sustente cada comunidade, família e equipe com intercessão constante." },
-    { number: "02", title: "Vá", description: "Coloque seus dons à disposição em ações e experiências missionárias futuras." },
-    { number: "03", title: "Contribua", description: "Ajude a tornar possíveis os próximos passos, projetos e deslocamentos." },
-    { number: "04", title: "Compartilhe", description: "Apresente o Semear à sua igreja, rede de amigos e comunidade." },
+    {
+      title: "Ore",
+      description: "Sustente cada comunidade, família e equipe com intercessão constante.",
+      icon: "pray",
+    },
+    {
+      title: "Vá",
+      description: "Coloque seus dons à disposição nas próximas viagens e ações missionárias.",
+      icon: "go",
+    },
+    {
+      title: "Contribua",
+      description: "Seja mantenedor com R$ 10 por mês e ajude a tornar possíveis os deslocamentos, materiais e próximos passos.",
+      icon: "give",
+      href: "/mantenedor",
+      linkLabel: "Seja mantenedor",
+    },
+    {
+      title: "Compartilhe",
+      description: "Apresente o Semear à sua igreja, sua família e seus amigos.",
+      icon: "share",
+    },
+  ],
+  upcoming: [
+    {
+      title: "Área do participante",
+      description:
+        "Acompanhe sua inscrição, pagamentos e avisos da viagem em um só lugar.",
+      status: "Em breve",
+    },
+    {
+      title: "Lojinha da missão",
+      description:
+        "Camisetas e produtos cuja renda ajuda a sustentar as viagens e o trabalho nas comunidades.",
+      status: "Já no ar",
+      href: "/loja",
+    },
   ],
   links: {
-    participation: "https://docs.google.com/forms/d/e/1FAIpQLSeEyw9kplkwU2v0juYY365Tpt2A-20Zg6bdyFNi0WIbEQTWsw/viewform?usp=dialog",
-    whatsapp: "",
+    /** página de inscrições do próprio site (leva direto ao evento quando só um está aberto) */
+    participation: "/inscricoes",
+    whatsapp:
+      "https://api.whatsapp.com/send?phone=5581993336981&text=" +
+      encodeURIComponent("Olá! Vim pelo site do Semear no Sertão e gostaria de saber mais sobre a missão."),
     donation: "",
     instagram: "https://www.instagram.com/missaosemearnosertao/",
     youtube: "https://www.youtube.com/@MissaoSemearnoSertao",

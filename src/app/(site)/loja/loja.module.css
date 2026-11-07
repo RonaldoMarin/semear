@@ -1,0 +1,51 @@
+/* ---------- topo ---------- */
+.hero { position: relative; padding: clamp(40px, 6vw, 72px) 0 clamp(48px, 6vw, 80px); background: var(--terra-escura); color: var(--creme); overflow: hidden; }
+.heroInner { position: relative; z-index: 1; display: grid; gap: 14px; justify-items: start; }
+.heroSeed { position: absolute; right: -80px; top: -60px; width: 340px; height: 420px; border-radius: 100% 0 100% 0; background: var(--sol); opacity: 0.14; transform: rotate(-24deg); pointer-events: none; }
+.kicker { margin: 8px 0 0; color: var(--folha); font-size: 0.78rem; font-weight: 800; letter-spacing: 0.16em; text-transform: uppercase; }
+.hero h1 { margin: 0; font-size: clamp(2.4rem, 5.4vw, 4.4rem); color: var(--creme); }
+.subtitle { margin: 0; max-width: 620px; font-size: 1.15rem; color: rgba(251, 246, 236, 0.8); }
+
+/* ---------- catálogo ---------- */
+.catalogo { padding-block: clamp(36px, 5vw, 60px) clamp(64px, 8vw, 104px); }
+.grade { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 250px), 1fr)); gap: clamp(16px, 2.4vw, 28px); margin: 0; padding: 0; list-style: none; }
+.card { display: grid; height: 100%; border-radius: 22px; overflow: hidden; background: var(--papel); border: 1px solid var(--linha); transition: transform 180ms ease, box-shadow 180ms ease; }
+.card:hover { transform: translateY(-4px); box-shadow: var(--sombra); }
+.capa { position: relative; display: grid; place-items: center; aspect-ratio: 1; background: var(--areia); color: var(--tinta-suave); overflow: hidden; }
+.capa img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transition: transform 300ms ease, opacity 250ms ease; }
+.capa .capaHover { position: absolute; inset: 0; opacity: 0; }
+.card:hover .capa img { transform: scale(1.03); }
+.card:hover .capaHover { opacity: 1; }
+.selo { position: absolute; z-index: 1; top: 12px; left: 12px; padding: 4px 12px; border-radius: 999px; background: var(--terra-escura); color: var(--creme); font-size: 0.75rem; font-weight: 800; }
+.esgotado .capa img { filter: grayscale(0.6); opacity: 0.75; }
+.cardInfo { display: grid; gap: 6px; align-content: start; padding: 16px 18px 20px; }
+.cardInfo strong { color: var(--terra-escura); font-size: 1.08rem; line-height: 1.3; }
+.preco { font-family: var(--fonte-display); font-weight: 800; font-size: 1.35rem; color: var(--folha-escura); }
+.tamanhos { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 2px; }
+.tamanhos span { min-width: 30px; padding: 2px 7px; border: 1px solid var(--linha); border-radius: 7px; text-align: center; font-size: 0.74rem; font-weight: 800; color: var(--terra); }
+.tamanhos span[data-esgotado="true"] { opacity: 0.4; text-decoration: line-through; }
+
+.vazio { display: grid; justify-items: center; gap: 14px; max-width: 520px; margin: 0 auto; padding: 48px 24px; text-align: center; }
+.vazio h2 { margin: 0; font-size: clamp(1.6rem, 3vw, 2.1rem); color: var(--terra-escura); }
+.vazio p { margin: 0 0 6px; color: var(--tinta-suave); }
+.vazioIcone { display: grid; place-items: center; width: 80px; height: 80px; border-radius: var(--semente); background: var(--folha-clara); color: var(--folha-escura); }
+
+/* ---------- página do produto ---------- */
+.produto { padding-block: clamp(24px, 3vw, 36px) clamp(64px, 8vw, 104px); }
+.trilha { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: clamp(18px, 3vw, 30px); font-size: 0.9rem; font-weight: 700; color: var(--tinta-suave); }
+.trilha a { color: var(--folha-escura); }
+.trilha a:hover { text-decoration: underline; }
+.produtoGrid { display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr); gap: clamp(24px, 4.5vw, 64px); align-items: start; }
+.detalhes { display: grid; gap: 18px; }
+.codigo { margin: 0; color: var(--tinta-suave); font-size: 0.8rem; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; }
+.detalhes h1 { margin: -10px 0 0; font-size: clamp(2rem, 4vw, 3rem); color: var(--terra-escura); line-height: 1.05; }
+.descricao { display: grid; gap: 8px; padding-top: 18px; border-top: 1px solid var(--linha); }
+.descricao h2 { margin: 0; font-size: 1.15rem; color: var(--terra-escura); }
+.descricao p { margin: 0; color: var(--tinta-suave); white-space: pre-line; }
+.comoFunciona { padding: 18px 20px; border-radius: 18px; background: var(--areia); }
+.comoFunciona strong { color: var(--terra-escura); }
+.comoFunciona ol { margin: 8px 0 0; padding-left: 20px; color: var(--tinta-suave); font-size: 0.94rem; display: grid; gap: 4px; }
+
+@media (max-width: 860px) {
+  .produtoGrid { grid-template-columns: 1fr; }
+}

@@ -1,0 +1,102 @@
+/* ---------- resumo ---------- */
+.summary { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; margin-bottom: 20px; }
+.summaryItem { display: grid; gap: 2px; padding: 18px 20px; border-radius: 18px; background: var(--papel); border: 1px solid var(--linha); border-left: 5px solid var(--c, var(--linha)); }
+.summaryItem strong { font-family: var(--fonte-display); font-size: 2rem; line-height: 1; color: var(--terra-escura); }
+.summaryItem span { font-size: 0.86rem; font-weight: 700; color: var(--tinta-suave); }
+.summaryItem[data-papel="ADM"] { --c: var(--terra-escura); }
+.summaryItem[data-papel="VOLUNTARIO"] { --c: var(--folha-escura); }
+.summaryItem[data-papel="ACESSO"] { --c: #3f6f9c; }
+.summaryItem[data-papel="PENDENTE"] { --c: #c99a2e; }
+
+/* ---------- lista ---------- */
+.listHeader, .row {
+  display: grid;
+  grid-template-columns: minmax(220px, 1.6fr) minmax(170px, 1fr) minmax(150px, 1fr) minmax(130px, 0.8fr) 48px;
+  gap: 16px;
+  align-items: center;
+  padding: 14px 22px;
+}
+.listHeader { background: #fbf6ec; border-bottom: 1px solid var(--linha); border-radius: 22px 22px 0 0; }
+.listHeader span { font-size: 0.72rem; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; color: var(--tinta-suave); }
+.list { margin: 0; padding: 0; list-style: none; }
+.row + .row { border-top: 1px solid var(--linha); }
+.row:hover { background: #fdf9f0; }
+.rowOff { opacity: 0.6; }
+
+.person { display: flex; align-items: center; gap: 14px; min-width: 0; }
+.person > div { min-width: 0; }
+.person strong { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; color: var(--terra-escura); }
+.person small { display: block; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; color: var(--tinta-suave); font-size: 0.85rem; }
+.avatar { display: grid; place-items: center; flex: none; width: 42px; height: 42px; border-radius: 50%; background: var(--areia); color: var(--terra); font-weight: 800; font-size: 0.88rem; }
+.avatar[data-papel="ADM"] { background: var(--terra-escura); color: var(--creme); }
+.avatar[data-papel="VOLUNTARIO"] { background: #b9da92; color: #233f0b; }
+.avatar[data-papel="ACESSO"] { background: #c9dbee; color: #234a6e; }
+.you { padding: 2px 8px; border-radius: 999px; background: var(--sol); color: var(--terra-noite); font-size: 0.68rem; font-weight: 800; letter-spacing: 0.06em; text-transform: uppercase; }
+
+.cell { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; min-width: 0; }
+.muted { color: var(--tinta-suave); font-size: 0.88rem; }
+.actions { display: flex; justify-content: flex-end; }
+
+.role { display: inline-flex; align-items: center; padding: 5px 12px; border-radius: 999px; font-size: 0.82rem; font-weight: 800; background: var(--areia); color: var(--terra); }
+.role[data-papel="ADM"] { background: var(--terra-escura); color: var(--creme); }
+.role[data-papel="VOLUNTARIO"] { background: #b9da92; color: #233f0b; }
+.role[data-papel="ACESSO"] { background: #c9dbee; color: #234a6e; }
+
+.tag { display: inline-flex; align-items: center; padding: 4px 10px; border-radius: 999px; font-size: 0.76rem; font-weight: 800; white-space: nowrap; }
+.tagOk { background: #b9da92; color: #233f0b; }
+.tagPending { background: #efcf7e; color: #5a3d05; }
+.tagOff { background: #d3c3ae; color: #3d2f24; }
+.tagMain { background: transparent; border: 1.5px solid var(--terra-escura); color: var(--terra-escura); }
+
+.roleSelect {
+  width: 100%; max-width: 190px;
+  min-height: 40px; padding: 0 30px 0 12px;
+  border: 1.5px solid rgba(90, 71, 58, 0.2); border-radius: 10px;
+  background: var(--papel); font: inherit; font-size: 0.88rem; font-weight: 700; color: var(--terra-escura);
+}
+.roleSelect:disabled { opacity: 0.6; }
+
+/* ---------- legenda ---------- */
+.legend { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; margin-top: 20px; }
+.legendItem { display: grid; gap: 8px; justify-items: start; padding: 16px 18px; border-radius: 16px; background: rgba(255, 253, 248, 0.6); border: 1px dashed rgba(90, 71, 58, 0.22); }
+.legendItem p { margin: 0; color: var(--tinta-suave); font-size: 0.88rem; }
+.legendNote { grid-column: 1 / -1; margin: 0; font-size: 0.84rem; color: var(--tinta-suave); }
+.legendNote code { font-size: 0.8rem; font-weight: 800; color: var(--terra-escura); }
+
+/* ---------- diálogo de convite ---------- */
+.dialog { width: min(520px, calc(100vw - 32px)); padding: 0; border: 0; border-radius: 24px; background: var(--papel); color: var(--tinta); box-shadow: 0 40px 80px -30px rgba(0, 0, 0, 0.5); }
+.dialog::backdrop { background: rgba(36, 27, 21, 0.5); backdrop-filter: blur(2px); }
+.dialog[open] { animation: subir 200ms ease; }
+@keyframes subir { from { opacity: 0; transform: translateY(10px); } }
+.dialogInner { display: grid; gap: 18px; padding: 26px; }
+.dialogHeader { display: flex; justify-content: space-between; gap: 16px; align-items: flex-start; }
+.dialogHeader h2 { margin: 0 0 4px; font-size: 1.6rem; color: var(--terra-escura); }
+.dialogHeader p { margin: 0; color: var(--tinta-suave); font-size: 0.9rem; }
+.close { display: grid; place-items: center; flex: none; width: 40px; height: 40px; border: 0; border-radius: 12px; background: #f6f1e6; color: var(--terra-escura); cursor: pointer; }
+.close:hover { background: var(--areia); }
+
+.inviteForm { display: grid; gap: 16px; }
+.inviteForm :global(.button) { width: 100%; }
+.roles { display: grid; gap: 8px; margin: 0; padding: 0; border: 0; }
+.roleOption {
+  display: flex; gap: 12px; align-items: flex-start;
+  padding: 12px 14px;
+  border: 1.5px solid rgba(90, 71, 58, 0.16);
+  border-radius: 14px;
+  cursor: pointer;
+}
+.roleOption:has(input:checked) { border-color: var(--folha-escura); background: #f5f9ee; }
+.roleOption input { margin-top: 3px; accent-color: var(--folha-escura); }
+.roleOption strong { display: block; font-size: 0.9rem; color: var(--terra-escura); }
+.roleOption small { display: block; font-size: 0.78rem; color: var(--tinta-suave); }
+
+@media (max-width: 1000px) {
+  .summary { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .listHeader { display: none; }
+  .row { grid-template-columns: minmax(0, 1fr) auto; gap: 10px 16px; padding: 16px 18px; }
+  .person { grid-column: 1; }
+  .actions { grid-column: 2; grid-row: 1; }
+  .cell { grid-column: 1 / -1; }
+  .cell[data-label]::before { content: attr(data-label) ": "; min-width: 110px; font-size: 0.78rem; font-weight: 800; color: var(--tinta-suave); }
+  .legend { grid-template-columns: 1fr; }
+}

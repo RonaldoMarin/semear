@@ -1,0 +1,92 @@
+/* ---------- botão no cabeçalho ---------- */
+.botao {
+  position: relative; display: inline-grid; place-items: center; flex: none;
+  width: 46px; height: 46px; padding: 0;
+  border: 1.5px solid var(--linha); border-radius: 50%;
+  background: var(--papel); color: var(--terra-escura); cursor: pointer;
+  transition: border-color 160ms ease, transform 160ms ease;
+}
+.botao:hover { border-color: var(--terra-escura); transform: translateY(-1px); }
+.badge {
+  position: absolute; top: -4px; right: -4px;
+  min-width: 21px; height: 21px; padding: 0 6px;
+  display: grid; place-items: center;
+  border-radius: 999px; background: var(--barro); color: #fff;
+  font-size: 0.72rem; font-weight: 800; line-height: 1;
+  box-shadow: 0 0 0 2px var(--creme);
+}
+
+/* ---------- gaveta ---------- */
+.drawer {
+  position: fixed; inset: 0 0 0 auto;
+  width: min(440px, 100vw); max-width: 100vw; height: 100dvh; max-height: 100dvh;
+  margin: 0; padding: 0; border: 0;
+  background: var(--creme); color: var(--tinta);
+  box-shadow: -30px 0 60px -30px rgba(36, 27, 21, 0.5);
+}
+.drawer::backdrop { background: rgba(36, 27, 21, 0.45); backdrop-filter: blur(2px); }
+.drawer[open] { animation: entrar 220ms ease-out; }
+@keyframes entrar { from { transform: translateX(40px); opacity: 0; } }
+
+.painel { display: flex; flex-direction: column; height: 100%; }
+.topo { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 20px 22px; border-bottom: 1px solid var(--linha); }
+.topo h2 { display: flex; align-items: center; gap: 10px; margin: 0; font-size: 1.5rem; color: var(--terra-escura); }
+.topo h2 span { padding: 2px 10px; border-radius: 999px; background: var(--folha-clara); color: var(--folha-escura); font-family: var(--fonte-texto); font-size: 0.85rem; font-weight: 800; }
+.fechar { display: grid; place-items: center; width: 40px; height: 40px; border: 0; border-radius: 50%; background: transparent; color: var(--terra-escura); font-size: 1.8rem; line-height: 1; cursor: pointer; }
+.fechar:hover { background: var(--areia); }
+
+.vazio { display: grid; justify-items: center; align-content: center; gap: 12px; flex: 1; padding: 32px 28px; text-align: center; }
+.vazio h3 { margin: 0; font-size: 1.4rem; color: var(--terra-escura); }
+.vazio p { margin: 0 0 8px; max-width: 320px; color: var(--tinta-suave); }
+.vazioIcone { display: grid; place-items: center; width: 72px; height: 72px; border-radius: var(--semente); background: var(--folha-clara); color: var(--folha-escura); }
+
+.itens { flex: 1; overflow-y: auto; margin: 0; padding: 8px 22px; list-style: none; }
+.item { display: grid; grid-template-columns: 72px minmax(0, 1fr) auto; gap: 14px; align-items: start; padding: 16px 0; border-bottom: 1px solid var(--linha); }
+.item:last-child { border-bottom: 0; }
+.thumb { display: grid; place-items: center; width: 72px; height: 72px; border-radius: 14px; overflow: hidden; background: var(--areia); color: var(--tinta-suave); }
+.thumb img { width: 100%; height: 100%; object-fit: cover; }
+.itemInfo { display: grid; gap: 4px; min-width: 0; }
+.itemInfo > a { font-weight: 800; color: var(--terra-escura); line-height: 1.25; }
+.itemInfo > a:hover { text-decoration: underline; }
+.itemInfo small { color: var(--tinta-suave); font-size: 0.85rem; }
+.itemInfo b { color: var(--terra-escura); }
+.qtd { display: inline-flex; align-items: center; width: fit-content; margin-top: 4px; border: 1.5px solid var(--linha); border-radius: 999px; background: var(--papel); }
+.qtd button { width: 32px; height: 32px; border: 0; background: transparent; color: var(--terra-escura); font-size: 1.1rem; font-weight: 800; cursor: pointer; border-radius: 50%; }
+.qtd button:hover:not(:disabled) { background: var(--areia); }
+.qtd button:disabled { opacity: 0.3; cursor: default; }
+.qtd span { min-width: 26px; text-align: center; font-weight: 800; }
+.itemFim { display: grid; justify-items: end; gap: 6px; }
+.itemFim strong { color: var(--terra-escura); white-space: nowrap; }
+.remover { padding: 0; border: 0; background: none; color: var(--tinta-suave); font: inherit; font-size: 0.8rem; text-decoration: underline; cursor: pointer; }
+.remover:hover { color: #b23a2a; }
+
+.rodape { display: grid; gap: 14px; padding: 18px 22px 22px; border-top: 1px solid var(--linha); background: var(--papel); }
+.total { display: flex; align-items: baseline; justify-content: space-between; }
+.total span { font-weight: 700; color: var(--tinta-suave); }
+.total strong { font-family: var(--fonte-display); font-size: 1.7rem; color: var(--terra-escura); }
+
+.form { display: grid; gap: 10px; }
+.form label { display: grid; gap: 4px; }
+.form label > span { font-size: 0.85rem; font-weight: 800; color: var(--terra-escura); }
+.form em { font-style: normal; font-weight: 600; color: var(--tinta-suave); }
+.form input, .form textarea {
+  width: 100%; padding: 10px 14px;
+  border: 1.5px solid rgba(90, 71, 58, 0.22); border-radius: 12px;
+  background: #fff; color: var(--tinta); font: inherit; resize: vertical;
+}
+.form input:focus, .form textarea:focus { outline: 0; border-color: var(--folha-escura); box-shadow: 0 0 0 3px rgba(127, 178, 63, 0.25); }
+.erro { margin: 0; padding: 10px 14px; border-radius: 12px; background: #fbe5df; color: #8a2c1f; font-size: 0.88rem; font-weight: 600; }
+.finalizar { width: 100%; margin-top: 4px; }
+.finalizar:disabled { opacity: 0.7; transform: none; cursor: progress; }
+.nota { margin: 0; text-align: center; font-size: 0.78rem; color: var(--tinta-suave); }
+
+.pronto { display: grid; gap: 10px; }
+.pronto p { margin: 0; padding: 12px 14px; border-radius: 12px; background: var(--folha-clara); color: #2f4d12; font-size: 0.9rem; }
+.whats { width: 100%; background: #1fa855; color: #fff; }
+.whats:hover { background: #178a45; }
+.voltar { padding: 4px; border: 0; background: none; color: var(--tinta-suave); font: inherit; font-size: 0.86rem; font-weight: 700; text-decoration: underline; cursor: pointer; }
+
+@media (max-width: 480px) {
+  .item { grid-template-columns: 60px minmax(0, 1fr) auto; gap: 10px; }
+  .thumb { width: 60px; height: 60px; }
+}

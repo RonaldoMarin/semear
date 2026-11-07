@@ -1,0 +1,11 @@
+.botao {
+  flex: none;
+  min-height: 40px; padding: 0 16px;
+  border: 1.5px solid var(--terra-escura); border-radius: 999px;
+  background: transparent; color: var(--terra-escura);
+  font: inherit; font-size: 0.85rem; font-weight: 800; white-space: nowrap;
+  cursor: pointer;
+  transition: background 160ms ease, color 160ms ease, border-color 160ms ease;
+}
+.botao:hover { background: var(--terra-escura); color: var(--creme); }
+.ok, .ok:hover { border-color: var(--folha-escura); background: var(--folha-escura); color: #fff; }

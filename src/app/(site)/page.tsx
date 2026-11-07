@@ -1,33 +1,26 @@
 import { Contact } from "@/components/landing/Contact";
+import { Fronts } from "@/components/landing/Fronts";
 import { Hero } from "@/components/landing/Hero";
-import { ImpactStats } from "@/components/landing/ImpactStats";
 import { Mission } from "@/components/landing/Mission";
+import { NextMission } from "@/components/landing/NextMission";
 import { Participation } from "@/components/landing/Participation";
-import { Projects } from "@/components/landing/Projects";
-import { SiteFooter } from "@/components/landing/SiteFooter";
-import { SiteHeader } from "@/components/landing/SiteHeader";
 import { StorySection } from "@/components/landing/StorySection";
+import { Upcoming } from "@/components/landing/Upcoming";
+
+// a faixa "próxima missão" lê o banco: a home é refeita no máximo a cada minuto
+export const revalidate = 60;
 
 export default function Home() {
   return (
     <>
-      <a className="skip-link" href="#conteudo">
-        Pular para o conteúdo
-      </a>
-
-      <SiteHeader />
-
-      <main id="conteudo">
-        <Hero />
-        <Mission />
-        <ImpactStats />
-        <Projects />
-        <StorySection />
-        <Participation />
-        <Contact />
-      </main>
-
-      <SiteFooter />
+      <Hero />
+      <NextMission />
+      <Mission />
+      <Fronts />
+      <StorySection />
+      <Participation />
+      <Upcoming />
+      <Contact />
     </>
   );
 }

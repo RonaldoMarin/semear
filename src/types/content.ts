@@ -1,5 +1,12 @@
+export interface NavItem {
+  label: string;
+  href: string;
+}
+
 export interface SiteHero {
+  eyebrow: string;
   title: string;
+  highlight: string;
   description: string;
   image: string;
   alt: string;
@@ -12,22 +19,48 @@ export interface SiteMission {
   statement: string;
 }
 
+export interface SiteVerse {
+  text: string;
+  reference: string;
+}
+
 export interface SiteStatistic {
   value: string;
   label: string;
 }
 
-export interface SiteProject {
-  number: string;
+export type FrontIcon = "presence" | "growth" | "hands";
+
+export interface SiteFront {
   title: string;
   description: string;
   tag: string;
+  icon: FrontIcon;
 }
 
-export interface SiteParticipation {
-  number: string;
+export interface SiteStory {
+  eyebrow: string;
   title: string;
   description: string;
+}
+
+export type ParticipationIcon = "pray" | "go" | "give" | "share";
+
+export interface SiteParticipation {
+  title: string;
+  description: string;
+  icon: ParticipationIcon;
+  /** link opcional ("Saiba mais") */
+  href?: string;
+  linkLabel?: string;
+}
+
+export interface SiteUpcoming {
+  title: string;
+  description: string;
+  status: string;
+  /** quando a área já existe, vira link */
+  href?: string;
 }
 
 export interface SiteLinks {
@@ -41,11 +74,17 @@ export interface SiteLinks {
 export interface SiteConfig {
   name: string;
   shortName: string;
-  eyebrow: string;
+  tagline: string;
+  /** Número do WhatsApp formatado para exibição. */
+  whatsappDisplay: string;
+  navigation: NavItem[];
   hero: SiteHero;
-  mission: SiteMission;
   statistics: SiteStatistic[];
-  projects: SiteProject[];
+  mission: SiteMission;
+  verse: SiteVerse;
+  fronts: SiteFront[];
+  story: SiteStory;
   participation: SiteParticipation[];
+  upcoming: SiteUpcoming[];
   links: SiteLinks;
 }

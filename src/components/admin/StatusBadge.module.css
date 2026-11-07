@@ -1,0 +1,18 @@
+.badge {
+  --c: #7a6a5c;
+  --bg: rgba(122, 106, 92, 0.12);
+  display: inline-flex; align-items: center; gap: 7px;
+  padding: 4px 10px 4px 9px;
+  border-radius: 999px;
+  background: var(--bg);
+  color: var(--c);
+  font-size: 0.76rem; font-weight: 800; white-space: nowrap;
+}
+.dot { width: 7px; height: 7px; border-radius: 50%; background: currentColor; }
+
+.badge[data-status="RASCUNHO"] { --c: #8a6414; --bg: #f8e9c4; }
+.badge[data-status="EM_BREVE"] { --c: #2f5f8a; --bg: #dfeaf5; }
+.badge[data-status="INSCRICOES_ABERTAS"] { --c: #3f6b17; --bg: #e2f0cf; }
+.badge[data-status="INSCRICOES_ENCERRADAS"] { --c: #a2462e; --bg: #f8e0d6; }
+.badge[data-status="REALIZADO"] { --c: #5a473a; --bg: #ece2d4; }
+.badge[data-status="CANCELADO"] { --c: #9c2a2a; --bg: #f6dada; }

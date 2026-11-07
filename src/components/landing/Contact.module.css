@@ -1,0 +1,37 @@
+.contact { padding-block: clamp(72px, 9vw, 120px); background: var(--folha); color: var(--terra-noite); overflow: hidden; }
+
+.inner {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 48px;
+}
+
+.copy { max-width: 760px; }
+.kicker { margin-bottom: 16px; font-weight: 800; letter-spacing: 0.16em; text-transform: uppercase; font-size: 0.8rem; }
+.copy h2 { margin-bottom: 20px; font-size: clamp(2.2rem, 4.6vw, 4rem); color: var(--terra-noite); }
+.copy > p:not(.kicker) { max-width: 540px; margin-bottom: 32px; font-size: 1.1rem; }
+
+.actions { display: flex; flex-wrap: wrap; gap: 12px; }
+.actions :global(.button:hover) svg { transform: none; }
+.actions :global(.button) { box-shadow: 0 10px 24px -14px rgba(36, 27, 21, 0.6); }
+.secondary { background: var(--creme); color: var(--terra-escura); }
+.secondary:hover { background: var(--papel); }
+.youtube { color: #c4302b; }   /* cor da rede só no ícone */
+.instagram { color: #c13584; }
+
+/* símbolo com a parte verde sobre o fundo verde: usamos só a silhueta */
+.symbol {
+  width: clamp(180px, 22vw, 280px);
+  height: auto;
+  filter: brightness(0) invert(1);
+  opacity: 0.35;
+  transform: rotate(8deg);
+}
+
+@media (max-width: 760px) {
+  .inner { grid-template-columns: 1fr; }
+  .symbol { display: none; }
+  .actions { flex-direction: column; }
+  .actions :global(.button) { width: 100%; }
+}

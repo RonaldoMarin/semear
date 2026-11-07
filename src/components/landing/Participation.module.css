@@ -1,0 +1,51 @@
+.participation { background: var(--creme); }
+
+.heading {
+  display: flex; align-items: flex-end; justify-content: space-between; gap: 32px;
+  margin-bottom: clamp(40px, 5vw, 60px);
+}
+.heading > div { max-width: 680px; }
+.heading :global(.button) { flex: none; }
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  margin: 0; padding: 0; list-style: none;
+}
+
+.card {
+  padding: 26px 24px 30px;
+  border-radius: var(--raio-lg);
+  background: var(--papel);
+  border: 1px solid var(--linha);
+}
+.top { display: flex; align-items: center; justify-content: space-between; margin-bottom: 40px; }
+.icon {
+  display: grid; place-items: center;
+  width: 52px; height: 52px;
+  border-radius: 50%;
+  background: var(--folha);
+  color: var(--terra-noite);
+}
+.number {
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: var(--areia);
+  color: var(--terra);
+  font-size: 0.74rem; font-weight: 800; letter-spacing: 0.12em; text-transform: uppercase;
+}
+.card h3 { margin-bottom: 10px; font-size: 2rem; color: var(--terra-escura); }
+.card p { margin: 0; color: var(--tinta-suave); font-size: 0.97rem; }
+
+@media (max-width: 1000px) {
+  .grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 640px) {
+  .heading { flex-direction: column; align-items: flex-start; }
+  .grid { grid-template-columns: 1fr; }
+  .top { margin-bottom: 24px; }
+}
+.card { display: flex; flex-direction: column; }
+.cardLink { margin-top: auto; padding-top: 16px; font-size: 0.92rem; }

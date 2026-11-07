@@ -1,0 +1,70 @@
+.header {
+  position: sticky;
+  z-index: 50;
+  top: 0;
+  background: rgba(251, 246, 236, 0.86);
+  backdrop-filter: saturate(1.4) blur(14px);
+  -webkit-backdrop-filter: saturate(1.4) blur(14px);
+  border-bottom: 1px solid transparent;
+  transition: border-color 200ms ease, box-shadow 200ms ease;
+}
+.open { background: var(--creme); }
+.scrolled { border-color: var(--linha); box-shadow: 0 10px 30px -24px rgba(52, 40, 31, 0.5); }
+
+.inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  min-height: var(--cabecalho);
+}
+
+.brand { display: inline-flex; flex: none; }
+.logo { width: auto; height: 46px; }
+
+.nav { display: flex; align-items: center; gap: clamp(18px, 2.6vw, 38px); font-weight: 700; font-size: 0.95rem; color: var(--terra-escura); }
+.nav a { position: relative; padding-block: 6px; }
+.nav a::after {
+  content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 2px;
+  background: var(--folha); border-radius: 2px;
+  transform: scaleX(0); transform-origin: left; transition: transform 200ms ease;
+}
+.nav a:hover::after { transform: scaleX(1); }
+
+.acoes { display: flex; align-items: center; gap: 12px; flex: none; }
+.cta { min-height: 44px; padding-inline: 20px; font-size: 0.88rem; }
+
+.toggle {
+  display: none;
+  width: 46px; height: 46px; padding: 0;
+  flex-direction: column; align-items: center; justify-content: center; gap: 5px;
+  border: 1.5px solid var(--linha); border-radius: 50%;
+  background: var(--papel); cursor: pointer;
+}
+.toggle span { display: block; width: 18px; height: 2px; border-radius: 2px; background: var(--terra-escura); transition: transform 200ms ease, opacity 160ms ease; }
+.open .toggle span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.open .toggle span:nth-child(2) { opacity: 0; }
+.open .toggle span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+.mobile { border-top: 1px solid var(--linha); background: var(--creme); padding: 8px 0 28px; }
+.mobile[hidden] { display: none; }
+.mobile :global(.container) { display: flex; flex-direction: column; }
+.mobile a:not(.mobileCta) {
+  padding: 16px 0;
+  border-bottom: 1px solid var(--linha);
+  font-family: var(--fonte-display); font-size: 1.4rem; font-weight: 800; color: var(--terra-escura);
+}
+.mobileCta { margin-top: 24px; }
+
+@media (max-width: 920px) {
+  .nav, .cta { display: none; }
+  .toggle { display: inline-flex; }
+}
+
+@media (min-width: 921px) {
+  .mobile { display: none !important; }
+}
+
+@media (max-width: 640px) {
+  .logo { height: 38px; }
+}

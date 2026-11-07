@@ -4,7 +4,9 @@ generator client {
 
 datasource db {
   provider = "postgresql"
-  url      = env("DATABASE_URL")
+  url       = env("DATABASE_URL")
+  /// conexão direta (sem pooler) usada pelas migrações — no Supabase é a porta 5432
+  directUrl = env("DIRECT_URL")
 }
 
 model Contato {
@@ -16,4 +18,313 @@ model Contato {
   lidoEm   Boolean  @default(false) @map("lido_em")
 
   @@map("contatos")
+}
+
+// ---------------------------------------------------------------------------
+// Painel administrativo: usuários e sessões
+// ---------------------------------------------------------------------------
+
+enum Papel {
+  ACESSO     // só visualiza
+  VOLUNTARIO // cria e edita eventos
+  ADM        // acesso total
+}
+
+model Usuario {
+  id             String    @id @default(cuid())
+  nome           String
+  email          String    @unique
+  /// null = convite pendente (cadastrado por um ADM, ainda sem senha)
+  senhaHash      String?   @map("senha_hash")
+  papel          Papel     @default(ACESSO)
+  ativo          Boolean   @default(true)
+  ultimoAcessoEm DateTime? @map("ultimo_acesso_em")
+  criadoEm       DateTime  @default(now()) @map("criado_em")
+  atualizadoEm   DateTime  @updatedAt @map("atualizado_em")
+
+  sessoes           Sessao[]
+  redefinicoes      RedefinicaoSenha[]
+  eventosCriados    Evento[] @relation("EventoCriadoPor")
+  eventosAtualizados Evento[] @relation("EventoAtualizadoPor")
+
+  @@map("usuarios")
+}
+
+model Sessao {
+  id        String   @id @default(cuid())
+  /// sha256 do token salvo no cookie
+  tokenHash String   @unique @map("token_hash")
+  usuarioId String   @map("usuario_id")
+  usuario   Usuario  @relation(fields: [usuarioId], references: [id], onDelete: Cascade)
+  expiraEm  DateTime @map("expira_em")
+  criadoEm  DateTime @default(now()) @map("criado_em")
+
+  @@index([usuarioId])
+  @@map("sessoes")
+}
+
+/// Pedido de "esqueci minha senha": o link enviado por e-mail carrega o token; aqui fica só o hash.
+model RedefinicaoSenha {
+  id        String    @id @default(cuid())
+  tokenHash String    @unique @map("token_hash")
+  usuarioId String    @map("usuario_id")
+  usuario   Usuario   @relation(fields: [usuarioId], references: [id], onDelete: Cascade)
+  expiraEm  DateTime  @map("expira_em")
+  usadoEm   DateTime? @map("usado_em")
+  criadoEm  DateTime  @default(now()) @map("criado_em")
+
+  @@index([usuarioId, criadoEm])
+  @@map("redefinicoes_senha")
+}
+
+// ---------------------------------------------------------------------------
+// Eventos da missão
+// ---------------------------------------------------------------------------
+
+enum TipoEvento {
+  VIAGEM_MISSIONARIA
+  TREINAMENTO
+  ENCONTRO
+  EVANGELISMO
+  ARRECADACAO
+  OUTRO
+}
+
+enum StatusEvento {
+  RASCUNHO
+  EM_BREVE
+  INSCRICOES_ABERTAS
+  INSCRICOES_ENCERRADAS
+  REALIZADO
+  CANCELADO
+}
+
+enum TipoPergunta {
+  TEXTO_CURTO
+  PARAGRAFO
+  EMAIL
+  TELEFONE
+  CPF
+  DATA
+  ESCOLHA_UNICA
+  MULTIPLA_ESCOLHA
+}
+
+model Evento {
+  id        String       @id @default(cuid())
+  slug      String       @unique
+  nome      String
+  subtitulo String?
+  edicao    String?
+  tipo      TipoEvento   @default(VIAGEM_MISSIONARIA)
+  status    StatusEvento @default(RASCUNHO)
+  destaque  Boolean      @default(false)
+  /// resumo curto exibido em cards
+  resumo    String?
+  /// texto completo de apresentação
+  sobre     String?
+
+  dataInicio      DateTime  @map("data_inicio")
+  dataFim         DateTime  @map("data_fim")
+  inscricaoInicio DateTime? @map("inscricao_inicio")
+  inscricaoFim    DateTime? @map("inscricao_fim")
+  vagas           Int?
+  idadeMinima     Int?      @map("idade_minima")
+  requisitos      String?
+
+  imagemUrl String? @map("imagem_url")
+  videoUrl  String? @map("video_url")
+
+  valorInscricaoCentavos    Int?    @map("valor_inscricao_centavos")
+  valorPreInscricaoCentavos Int?    @map("valor_pre_inscricao_centavos")
+  prazoPreInscricaoDias     Int?    @map("prazo_pre_inscricao_dias")
+  informacoesPagamento      String? @map("informacoes_pagamento")
+  politicaCancelamento      String? @map("politica_cancelamento")
+
+  /// um item por linha
+  checklist String?
+
+  /// quando o convite do Plano Mantenedor foi enviado aos confirmados (1 dia após o fim)
+  emailMantenedorEnviadoEm DateTime? @map("email_mantenedor_enviado_em")
+
+  criadoPorId     String?  @map("criado_por_id")
+  criadoPor       Usuario? @relation("EventoCriadoPor", fields: [criadoPorId], references: [id], onDelete: SetNull)
+  atualizadoPorId String?  @map("atualizado_por_id")
+  atualizadoPor   Usuario? @relation("EventoAtualizadoPor", fields: [atualizadoPorId], references: [id], onDelete: SetNull)
+  criadoEm        DateTime @default(now()) @map("criado_em")
+  atualizadoEm    DateTime @updatedAt @map("atualizado_em")
+
+  locais      LocalEvento[]
+  programacao ProgramacaoItem[]
+  perguntas   PerguntaInscricao[]
+  contatos    ContatoEvento[]
+  inscricoes  Inscricao[]
+
+  @@index([status, dataInicio])
+  @@map("eventos")
+}
+
+model LocalEvento {
+  id       String  @id @default(cuid())
+  eventoId String  @map("evento_id")
+  evento   Evento  @relation(fields: [eventoId], references: [id], onDelete: Cascade)
+  /// ex.: "Teórico", "Prático"
+  etapa    String?
+  nome     String
+  endereco String?
+  cidade   String?
+  uf       String?
+  ordem    Int     @default(0)
+
+  @@map("eventos_locais")
+}
+
+model ProgramacaoItem {
+  id        String    @id @default(cuid())
+  eventoId  String    @map("evento_id")
+  evento    Evento    @relation(fields: [eventoId], references: [id], onDelete: Cascade)
+  titulo    String
+  inicio    DateTime
+  fim       DateTime?
+  descricao String?
+  ordem     Int       @default(0)
+
+  @@map("eventos_programacao")
+}
+
+model PerguntaInscricao {
+  id          String       @id @default(cuid())
+  eventoId    String       @map("evento_id")
+  evento      Evento       @relation(fields: [eventoId], references: [id], onDelete: Cascade)
+  /// identificador estável da pergunta (sobrevive a edições), usado nas condições
+  chave          String?
+  /// agrupa perguntas em etapas no formulário público (ex.: "Sobre você")
+  secao          String?
+  /// só mostra esta pergunta quando a pergunta `condicaoChave` tiver a resposta `condicaoValor`
+  condicaoChave  String? @map("condicao_chave")
+  condicaoValor  String? @map("condicao_valor")
+  label       String
+  ajuda       String?
+  tipo        TipoPergunta
+  opcoes      String[]
+  obrigatoria Boolean      @default(true)
+  ordem       Int          @default(0)
+
+  @@map("eventos_perguntas")
+}
+
+model ContatoEvento {
+  id       String  @id @default(cuid())
+  eventoId String  @map("evento_id")
+  evento   Evento  @relation(fields: [eventoId], references: [id], onDelete: Cascade)
+  nome     String
+  funcao   String?
+  telefone String
+  whatsapp Boolean @default(true)
+  ordem    Int     @default(0)
+
+  @@map("eventos_contatos")
+}
+
+// ---------------------------------------------------------------------------
+// Inscrições feitas pelo site
+// ---------------------------------------------------------------------------
+
+enum StatusInscricao {
+  PENDENTE     // aguardando pagamento da pré-inscrição
+  CONFIRMADA
+  CANCELADA
+  LISTA_ESPERA // inscrita depois que as vagas acabaram; não ocupa vaga
+}
+
+model Inscricao {
+  id       String          @id @default(cuid())
+  eventoId String          @map("evento_id")
+  evento   Evento          @relation(fields: [eventoId], references: [id], onDelete: Cascade)
+  status   StatusInscricao @default(PENDENTE)
+
+  /// campos extraídos das respostas para busca e controle de duplicidade
+  nome     String?
+  email    String?
+  cpf      String?
+  telefone String?
+
+  /// convite do Plano Mantenedor já enviado para esta pessoa (evita duplicar)
+  emailMantenedorEm DateTime? @map("email_mantenedor_em")
+
+  /// reunião de entrevista (Google Meet) marcada pela secretaria
+  entrevistaEm   DateTime? @map("entrevista_em")
+  entrevistaLink String?   @map("entrevista_link")
+
+  /// cópia das perguntas e respostas no momento da inscrição:
+  /// [{ "label": "...", "tipo": "TEXTO_CURTO", "valor": "..." | ["..."] }]
+  respostas Json
+
+  criadoEm     DateTime @default(now()) @map("criado_em")
+  atualizadoEm DateTime @updatedAt @map("atualizado_em")
+
+  @@index([eventoId, status])
+  @@index([eventoId, cpf])
+  @@index([eventoId, email])
+  @@map("inscricoes")
+}
+
+// ---------------------------------------------------------------------------
+// Lojinha da missão
+// ---------------------------------------------------------------------------
+
+model Produto {
+  id           String   @id @default(cuid())
+  /// código mostrado ao cliente e no pedido (ex.: SEM-001)
+  codigo       String   @unique
+  slug         String   @unique
+  nome         String
+  descricao    String?
+  precoCentavos Int     @map("preco_centavos")
+  ativo        Boolean  @default(true)
+  ordem        Int      @default(0)
+  criadoEm     DateTime @default(now()) @map("criado_em")
+  atualizadoEm DateTime @updatedAt @map("atualizado_em")
+
+  variantes VarianteProduto[]
+  imagens   ImagemProduto[]
+
+  @@map("produtos")
+}
+
+/// Tamanho (ou opção) do produto com seu estoque. Produto sem tamanhos tem uma única variante com nome vazio.
+model VarianteProduto {
+  id        String  @id @default(cuid())
+  produtoId String  @map("produto_id")
+  produto   Produto @relation(fields: [produtoId], references: [id], onDelete: Cascade)
+  nome      String  @default("")
+  estoque   Int     @default(0)
+  ordem     Int     @default(0)
+
+  @@map("produtos_variantes")
+}
+
+/// Foto do produto guardada no próprio banco (já reduzida no navegador antes do envio).
+model ImagemProduto {
+  id        String   @id @default(cuid())
+  produtoId String   @map("produto_id")
+  produto   Produto  @relation(fields: [produtoId], references: [id], onDelete: Cascade)
+  dados     Bytes
+  tipo      String
+  largura   Int
+  altura    Int
+  ordem     Int      @default(0)
+  criadoEm  DateTime @default(now()) @map("criado_em")
+
+  @@index([produtoId, ordem])
+  @@map("produtos_imagens")
+}
+
+/// Configurações editáveis pelo painel (ex.: WhatsApp que recebe os pedidos da loja).
+model Configuracao {
+  chave        String   @id
+  valor        String
+  atualizadoEm DateTime @updatedAt @map("atualizado_em")
+
+  @@map("configuracoes")
 }

@@ -1,0 +1,36 @@
+.shell {
+  display: grid;
+  grid-template-columns: minmax(360px, 0.9fr) minmax(0, 1.1fr);
+  min-height: 100svh;
+  background: var(--creme);
+}
+
+.brand {
+  position: relative;
+  display: flex; flex-direction: column; justify-content: space-between; gap: 40px;
+  padding: clamp(32px, 5vw, 56px);
+  background: var(--terra-noite);
+  color: var(--creme);
+  overflow: hidden;
+}
+.logo { width: auto; height: 60px; position: relative; z-index: 1; }
+.brandCopy { position: relative; z-index: 1; }
+.kicker { margin-bottom: 14px; color: var(--folha); font-size: 0.78rem; font-weight: 800; letter-spacing: 0.16em; text-transform: uppercase; }
+.brandCopy h2 { max-width: 420px; margin: 0; font-size: clamp(2rem, 3.4vw, 3rem); color: var(--creme); }
+.verse { position: relative; z-index: 1; max-width: 380px; margin: 0; font-family: var(--fonte-destaque); font-style: italic; font-size: 1.05rem; line-height: 1.5; color: rgba(251, 246, 236, 0.75); }
+.verse cite { display: block; margin-top: 8px; font-family: var(--fonte-texto); font-style: normal; font-weight: 800; font-size: 0.75rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--folha); }
+
+.seedA, .seedB { position: absolute; border-radius: 100% 0 100% 0; background: var(--folha); }
+.seedA { width: 320px; height: 400px; right: -120px; top: 18%; opacity: 0.12; transform: rotate(-24deg); }
+.seedB { width: 160px; height: 200px; right: 70px; bottom: -60px; opacity: 0.18; background: var(--sol); transform: rotate(18deg); }
+
+.main { display: grid; place-items: center; padding: clamp(24px, 5vw, 64px) 20px; }
+.card { width: min(100%, 440px); }
+
+@media (max-width: 860px) {
+  .shell { grid-template-columns: 1fr; }
+  .brand { flex-direction: row; align-items: center; padding: 18px 20px; }
+  .logo { height: 44px; }
+  .brandCopy, .verse, .seedB { display: none; }
+  .seedA { width: 140px; height: 170px; right: -40px; top: -40px; }
+}

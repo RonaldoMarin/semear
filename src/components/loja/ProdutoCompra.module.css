@@ -1,0 +1,46 @@
+/* ---------- galeria ---------- */
+.galeria { display: grid; gap: 12px; position: sticky; top: calc(var(--cabecalho) + 16px); }
+.principal { position: relative; aspect-ratio: 1; border-radius: 24px; overflow: hidden; background: var(--areia); border: 1px solid var(--linha); }
+.principal img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.semFoto { display: grid; place-items: center; color: var(--tinta-suave); }
+.miniaturas { display: flex; gap: 10px; overflow-x: auto; padding-bottom: 4px; }
+.miniaturas button { flex: none; width: 76px; height: 76px; padding: 0; border: 2px solid transparent; border-radius: 14px; overflow: hidden; background: var(--areia); cursor: pointer; opacity: 0.7; transition: opacity 150ms ease, border-color 150ms ease; }
+.miniaturas button:hover { opacity: 1; }
+.miniaturas img { width: 100%; height: 100%; object-fit: cover; }
+.miniAtiva { border-color: var(--folha-escura) !important; opacity: 1 !important; }
+
+/* ---------- compra ---------- */
+.compra { display: grid; gap: 18px; }
+.preco { margin: 0; font-family: var(--fonte-display); font-size: clamp(1.8rem, 3vw, 2.3rem); font-weight: 800; color: var(--folha-escura); }
+
+.tamanhos { margin: 0; padding: 0; border: 0; min-width: 0; }
+.tamanhos legend { margin-bottom: 10px; padding: 0; font-weight: 800; color: var(--terra-escura); }
+.tamanhos legend b { padding: 1px 9px; margin-left: 4px; border-radius: 7px; background: var(--folha-clara); color: var(--folha-escura); }
+.tamanhos legend span { color: #b23a2a; }
+.tamanhos > div { display: flex; flex-wrap: wrap; gap: 8px; }
+.tamanhos button {
+  min-width: 52px; height: 46px; padding: 0 14px;
+  border: 1.5px solid rgba(90, 71, 58, 0.25); border-radius: 12px;
+  background: var(--papel); color: var(--terra-escura);
+  font: inherit; font-weight: 800; cursor: pointer;
+  transition: border-color 150ms ease, background 150ms ease;
+}
+.tamanhos button:hover:not(:disabled) { border-color: var(--terra-escura); }
+.tamanhos button:disabled { opacity: 0.4; text-decoration: line-through; cursor: not-allowed; }
+.tamanhos .tamanhoAtivo { border-color: var(--terra-escura); background: var(--terra-escura); color: var(--creme); }
+.alerta button:not(:disabled) { border-color: #d0796a; }
+
+.acoes { display: flex; flex-wrap: wrap; gap: 12px; }
+.qtd { display: inline-flex; align-items: center; border: 1.5px solid rgba(90, 71, 58, 0.25); border-radius: 999px; background: var(--papel); }
+.qtd button { width: 46px; height: 50px; border: 0; background: transparent; color: var(--terra-escura); font-size: 1.3rem; font-weight: 800; cursor: pointer; border-radius: 999px; }
+.qtd button:hover:not(:disabled) { background: var(--areia); }
+.qtd button:disabled { opacity: 0.3; cursor: default; }
+.qtd span { min-width: 28px; text-align: center; font-weight: 800; font-size: 1.05rem; }
+.adicionar { flex: 1 1 220px; }
+.adicionar:disabled { opacity: 0.55; transform: none; cursor: not-allowed; }
+.estoque { margin: -6px 0 0; font-size: 0.88rem; font-weight: 700; color: var(--tinta-suave); }
+.esgotado { margin: 0; padding: 14px 16px; border-radius: 14px; background: #f6e3dc; color: #7c2e20; font-weight: 600; }
+
+@media (max-width: 860px) {
+  .galeria { position: static; }
+}

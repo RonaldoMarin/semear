@@ -1,25 +1,62 @@
+import Link from "next/link";
 import { siteConfig } from "@/lib/content";
+import { Icon } from "@/components/ui/Icon";
+import { Logo } from "./Logo";
+import styles from "./SiteFooter.module.css";
 
 export function SiteFooter() {
   return (
-    <footer className="site-footer">
-      <div className="container footer-top">
-        <a className="brand brand-footer" href="#inicio" aria-label="Projeto Semear, início">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img className="brand-logo brand-logo-footer" src="/images/semear-logo.svg" alt="Projeto Semear" />
-        </a>
-        <nav className="footer-social" aria-label="Redes sociais do Semear">
-          <a href={siteConfig.links.instagram} target="_blank" rel="noopener noreferrer" aria-label="Instagram do Semear (abre em nova aba)">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" aria-hidden="true" focusable="false"><rect x="3" y="3" width="18" height="18" rx="5" /><circle cx="12" cy="12" r="4" /><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none" /></svg>
-            Instagram
-          </a>
-          <a href={siteConfig.links.youtube} target="_blank" rel="noopener noreferrer" aria-label="YouTube do Semear (abre em nova aba)">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" aria-hidden="true" focusable="false"><rect x="2" y="5" width="20" height="14" rx="4" /><path d="m10 9 5 3-5 3Z" fill="currentColor" stroke="none" /></svg>
-            YouTube
-          </a>
+    <footer className={styles.footer}>
+      <div className={`container ${styles.top}`}>
+        <div className={styles.about}>
+          <Link href="/" aria-label="Semear no Sertão, página inicial">
+            <Logo variant="claro" className={styles.logo} />
+          </Link>
+          <p>Uma missão da igreja para espalhar a semente da salvação e caminhar junto com as comunidades do sertão nordestino.</p>
+        </div>
+
+        <nav className={styles.column} aria-label="Mapa do site">
+          <h2>Navegue</h2>
+          <ul>
+            {siteConfig.navigation.map((item) => (
+              <li key={item.href}>
+                <Link href={item.href}>{item.label}</Link>
+              </li>
+            ))}
+          </ul>
         </nav>
+
+        <div className={styles.column}>
+          <h2>Fale com a gente</h2>
+          <ul>
+            <li>
+              <a href={siteConfig.links.whatsapp} target="_blank" rel="noopener noreferrer">
+                <Icon name="whatsapp" size={20} /> {siteConfig.whatsappDisplay}
+                <span className="visually-hidden"> no WhatsApp (abre em nova aba)</span>
+              </a>
+            </li>
+            <li>
+              <a href={siteConfig.links.instagram} target="_blank" rel="noopener noreferrer">
+                <Icon name="instagram" size={20} /> Instagram
+                <span className="visually-hidden"> (abre em nova aba)</span>
+              </a>
+            </li>
+            <li>
+              <a href={siteConfig.links.youtube} target="_blank" rel="noopener noreferrer">
+                <Icon name="youtube" size={20} /> YouTube
+                <span className="visually-hidden"> (abre em nova aba)</span>
+              </a>
+            </li>
+          </ul>
+        </div>
       </div>
-      <div className="container footer-bottom"><span>© {new Date().getFullYear()} Projeto Semear</span><span><strong>Vocês foram escolhidos para irem e darem frutos.</strong></span></div>
+
+      <div className={`container ${styles.bottom}`}>
+        <span>© {new Date().getFullYear()} {siteConfig.name}</span>
+        <span className={styles.verse}>
+          “{siteConfig.verse.text}” — {siteConfig.verse.reference}
+        </span>
+      </div>
     </footer>
   );
 }

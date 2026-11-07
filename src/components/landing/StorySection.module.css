@@ -1,0 +1,19 @@
+.story { padding-block: clamp(72px, 9vw, 120px); background: var(--terra); color: var(--creme); }
+
+.grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  align-items: center;
+  gap: clamp(40px, 7vw, 104px);
+}
+
+.artWrap { border-radius: var(--raio-lg); overflow: hidden; box-shadow: 0 30px 60px -30px rgba(0, 0, 0, 0.5); }
+.art { width: 100%; height: auto; }
+
+.copy h2 { margin-bottom: 22px; font-size: clamp(2.2rem, 4vw, 3.5rem); color: var(--creme); }
+.copy > p:not(:global(.eyebrow)) { max-width: 480px; margin-bottom: 32px; color: rgba(251, 246, 236, 0.82); font-size: 1.08rem; line-height: 1.7; }
+
+@media (max-width: 860px) {
+  .grid { grid-template-columns: 1fr; }
+  .artWrap { order: 2; }
+}
