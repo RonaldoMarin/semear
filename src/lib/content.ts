@@ -13,9 +13,15 @@ export const siteConfig = {
   navigation: [
     { label: "A missão", href: "/#missao" },
     { label: "Como atuamos", href: "/#frentes" },
-    { label: "Participe", href: "/#participe" },
     { label: "Seja mantenedor", href: "/mantenedor" },
+    { label: "Loja", href: "/loja" },
+    { label: "Contato", href: "/#contato" },
+  ],
+  footerNavigation: [
+    { label: "A missão", href: "/#missao" },
+    { label: "Como atuamos", href: "/#frentes" },
     { label: "Inscrições", href: "/inscricoes" },
+    { label: "Seja mantenedor", href: "/mantenedor" },
     { label: "Loja", href: "/loja" },
     { label: "Contato", href: "/#contato" },
   ],

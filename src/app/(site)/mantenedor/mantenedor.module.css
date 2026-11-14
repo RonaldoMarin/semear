@@ -49,7 +49,7 @@
 
 /* ---------- fotos ---------- */
 .galeria { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; padding-block: clamp(48px, 7vw, 80px) 0; }
-.galeria img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; border-radius: 20px; }
+.galeria img { width: 100%; height: auto; aspect-ratio: 4 / 3; object-fit: cover; border-radius: 20px; }
 .galeria img:nth-child(odd) { border-radius: 20px 20px 60px 20px; }
 
 /* ---------- contato ---------- */
@@ -71,4 +71,14 @@
   .campo { flex-wrap: wrap; }
   .campo code { flex-basis: 100%; }
   .actions :global(.button) { width: 100%; }
+
+  /* foto do topo é bem larga (1080×440): no celular mostra inteira, com o texto embaixo */
+  .hero { display: block; min-height: 0; background: var(--terra-noite); }
+  .heroImg { display: block; position: relative; inset: auto; height: auto; aspect-ratio: 1080 / 440; }
+  .heroOverlay { inset: 0 0 auto; aspect-ratio: 1080 / 440; background: linear-gradient(180deg, rgba(36, 27, 21, 0) 55%, var(--terra-noite) 100%); }
+  .heroInner { padding-block: 20px 48px; }
+
+  /* fotos horizontais sem corte */
+  .galeria { grid-template-columns: 1fr; }
+  .galeria img { aspect-ratio: auto; height: auto; }
 }

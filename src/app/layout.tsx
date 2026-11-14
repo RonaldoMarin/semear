@@ -56,7 +56,7 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="pt-BR" className={`${display.variable} ${body.variable} ${accent.variable}`}>
+    <html lang="pt-BR" data-scroll-behavior="smooth" className={`${display.variable} ${body.variable} ${accent.variable}`}>
       {/* extensões do navegador costumam injetar atributos no <body> (ex.: inmaintabuse) */}
       <body suppressHydrationWarning>{children}</body>
     </html>

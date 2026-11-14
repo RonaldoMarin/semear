@@ -232,7 +232,7 @@ function ComposeDialog({ refDialog, inscricao }: { refDialog: React.RefObject<HT
       >
         <header className={styles.drawerHeader}>
           <div>
-            <span className={styles.drawerKicker}>Enviado por projetomissionariosemear316@gmail.com</span>
+            <span className={styles.drawerKicker}>Enviado por syssemear@gmail.com</span>
             <h2 id={`compose-${inscricao.id}`}>Enviar e-mail</h2>
             <p>
               Para <strong>{inscricao.nome}</strong> · {inscricao.email}

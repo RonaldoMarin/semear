@@ -14,10 +14,10 @@ export const metadata: Metadata = {
 };
 
 const fotos = [
-  { src: "/images/mantenedor/foto-1.jpg", alt: "Voluntários da missão trabalhando na reforma de uma casa no sertão" },
-  { src: "/images/mantenedor/foto-2.jpg", alt: "Missionário ajudando uma criança com uma atividade em sala de aula" },
-  { src: "/images/mantenedor/foto-3.jpg", alt: "Equipe preparando refeições na cozinha comunitária" },
-  { src: "/images/mantenedor/foto-4.jpg", alt: "Voluntários trabalhando na terra em uma comunidade rural" },
+  { src: "/images/mantenedor/foto-1.jpg", width: 1200, height: 626, alt: "Voluntários da missão trabalhando na reforma de uma casa no sertão" },
+  { src: "/images/mantenedor/foto-2.jpg", width: 1200, height: 626, alt: "Missionário ajudando uma criança com uma atividade em sala de aula" },
+  { src: "/images/mantenedor/foto-3.jpg", width: 1200, height: 763, alt: "Equipe preparando refeições na cozinha comunitária" },
+  { src: "/images/mantenedor/foto-4.jpg", width: 1077, height: 792, alt: "Voluntários trabalhando na terra em uma comunidade rural" },
 ];
 
 export default async function MantenedorPage() {
@@ -84,13 +84,7 @@ export default async function MantenedorPage() {
             <div className={styles.qr} dangerouslySetInnerHTML={{ __html: qr }} role="img" aria-label="QR Code do Pix do Plano Mantenedor" />
             <div className={styles.pixInfo}>
               <h2 id="pix-titulo">Contribua pelo Pix</h2>
-              <p className={styles.pixHint}>Aponte a câmera do app do seu banco para o QR Code ou use a chave abaixo.</p>
-
-              <span className={styles.campoLabel}>Chave Pix (e-mail)</span>
-              <div className={styles.campo}>
-                <code>{mantenedor.chavePix}</code>
-                <CopiarBotao texto={mantenedor.chavePix} rotulo="Copiar chave" />
-              </div>
+              <p className={styles.pixHint}>Aponte a câmera do app do seu banco para o QR Code ou use o Pix copia e cola abaixo.</p>
 
               <span className={styles.campoLabel}>Pix copia e cola</span>
               <div className={styles.campo}>
@@ -105,7 +99,7 @@ export default async function MantenedorPage() {
             <ol>
               <li>
                 <strong>Faça o Pix</strong>
-                <span>Pelo QR Code ou pela chave, com o valor que puder (o sugerido é {valor}).</span>
+                <span>Pelo QR Code ou pelo copia e cola, com o valor que puder (o sugerido é {valor}).</span>
               </li>
               <li>
                 <strong>Deixe programado todo mês</strong>
@@ -125,7 +119,7 @@ export default async function MantenedorPage() {
 
       <section className={`container ${styles.galeria}`} aria-label="A missão em campo">
         {fotos.map((foto) => (
-          <img key={foto.src} src={foto.src} alt={foto.alt} loading="lazy" />
+          <img key={foto.src} src={foto.src} width={foto.width} height={foto.height} alt={foto.alt} loading="lazy" />
         ))}
       </section>
 

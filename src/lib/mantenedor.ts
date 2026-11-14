@@ -12,7 +12,7 @@ export const mantenedor = {
   cidadeRecebedor: "Natal",
   whatsapp: "(81) 99333-6981",
   instagram: "missaosemearnosertao",
-  email: "projetomissionariosemear316@gmail.com",
+  email: "syssemear@gmail.com",
   /** para onde a oferta vai — ajuste se quiser detalhar */
   apoia: [
     "Deslocamento das equipes até as comunidades",

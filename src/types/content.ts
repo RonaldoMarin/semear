@@ -78,6 +78,8 @@ export interface SiteConfig {
   /** Número do WhatsApp formatado para exibição. */
   whatsappDisplay: string;
   navigation: NavItem[];
+  /** Mapa do site no rodapé: inclui páginas que no topo ficam no botão de destaque. */
+  footerNavigation: NavItem[];
   hero: SiteHero;
   statistics: SiteStatistic[];
   mission: SiteMission;

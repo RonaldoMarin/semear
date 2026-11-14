@@ -18,7 +18,7 @@ export function SiteFooter() {
         <nav className={styles.column} aria-label="Mapa do site">
           <h2>Navegue</h2>
           <ul>
-            {siteConfig.navigation.map((item) => (
+            {siteConfig.footerNavigation.map((item) => (
               <li key={item.href}>
                 <Link href={item.href}>{item.label}</Link>
               </li>
